@@ -1,0 +1,66 @@
+<div class="breadcrumb-container">
+	<ul class="breamcrumb">
+		<li><a href="{EQDKP_CONTROLLER_PATH}{SID}" title="{L_home}"><i class="fa fa-home"></i></a></li>
+		<li class="current"><a>{L_sg_signatur_link}</a></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<h2>{L_sg_signatur_link}</h2>
+
+<fieldset class="settings mediumsettings">
+	<dl>
+		<dt><label>{L_sg_select_char}</label></dt>
+		<dd>{CHAR_DD}</dd>
+	</dl>
+</fieldset>
+
+<!-- BEGIN signatur_row -->
+<fieldset class="settings mediumsettings signatur" data-sig-id="{signatur_row.ID}">
+	<legend>{signatur_row.NAME}</legend>
+	<dl><center>
+		<img src="{signatur_row.DIRECT}" class="preview"/></center></dl>
+	<dl>
+		<dt><label>{L_sg_bbcode}</label></dt>
+		<dd><input class="bbcode" size="40" value="{signatur_row.BBCODE}" type="text"/></dd>
+	</dl>
+	<dl>
+		<dt><label>{L_sg_htmlcode}</label></dt>
+		<dd><input class="html" size="40" value="{signatur_row.HTML}" type="text"/></dd>
+	</dl>
+	<dl>
+		<dt><label>{L_sg_direktlink}</label></dt>
+		<dd><input class="direct" size="40" value="{signatur_row.DIRECT}" type="text"/></dd>
+	</dl>
+</fieldset>
+<!-- END signatur_row -->
+<script>
+	function change_char(value){
+		var direct = '{DIRECT}';
+		var html = '{HTML}';
+		var bbcode = '{BBCODE}';
+		
+		var chardata = value.split("|");
+		var charid = chardata[0];
+		var charkey = chardata[1];
+		
+		$('.signatur').each(function(){
+			var sigid = $(this).data('sig-id');
+			
+			//Change Preview Image
+			new_direct = direct.replace(/KEY/g, charkey).replace(/ID/g, charid).replace(/SIG/g, sigid);
+			new_html = html.replace(/KEY/g, charkey).replace(/ID/g, charid).replace(/SIG/g, sigid);
+			new_bbcode = bbcode.replace(/KEY/g, charkey).replace(/ID/g, charid).replace(/SIG/g, sigid);
+			
+			$(this).find('.preview').attr('src', new_direct+'&_t='+(new Date().getTime()));
+			//Change HTML
+			$(this).find('.html').val(new_html);
+			//Change Direct
+			$(this).find('.bbcode').val(new_bbcode);
+			//Change BBCode
+			$(this).find('.direct').val(new_direct);
+		})
+			
+	}
+
+</script>

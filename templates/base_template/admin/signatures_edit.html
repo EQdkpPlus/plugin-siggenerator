@@ -1,0 +1,161 @@
+<script type="text/javascript">
+//<![CDATA[
+var id = {KEY};
+
+function delete_row(obj){
+	$(obj).parent().parent().remove();
+	live_preview();
+}
+
+function add_row(){
+	var new_row = $('#reference_row').html()+"";
+	new_row = new_row.replace(/KEY/g, id);
+	id = id + 1;
+	$("#gr_form_table").find('tbody').append('<tr>'+new_row+'</tr>');
+}
+
+function handle_pos(obj){
+	live_preview();
+}
+
+function handle_preset(obj){
+	live_preview();
+}
+
+function handle_label(obj){
+	live_preview();
+}
+
+function live_preview(){
+	$('#live_preview').html('<i class="fa fa-spin fa-spinner fa-lg"></i>');
+	
+	console.log("Live Preview");
+	console.log($('#myform').serialize());
+	$.post('signatures.php{SID}&livepreview=1', $('#myform').serialize(), function(data){
+		if (data){
+			$('#live_preview').html('<img src="'+data+'" />');
+		}
+	});
+}
+
+$(document).ready(function(){
+	$('#background, #font, #font_color, #font_border_color, #picture_preset').on('change', function(){
+		live_preview();
+	});
+	$('#font_border_size').on('spinchange', function(){
+		live_preview();
+	});
+	$( "#gr_form_table tbody" ).on( "sortupdate", function( event, ui ) {
+		live_preview();
+	});
+	
+	live_preview();
+})
+
+//]]>
+</script>
+
+<div class="breadcrumb-container">
+	<ul class="breamcrumb">
+		<li><a href="{EQDKP_CONTROLLER_PATH}{SID}" title="{L_home}"><i class="fa fa-home"></i></a></li>
+		<li><a href="{EQDKP_ROOT_PATH}admin/{SID}">{L_menu_admin_panel}</a>
+		<li><a href="{EQDKP_ROOT_PATH}plugins/siggenerator/admin/signatures.php{SID}">{L_siggenerator}: {L_sg_manage_signatures}</a></li>
+		<li class="current"><a><!-- IF NAME != "" -->{NAME}<!-- ELSE -->{L_sg_add_signature}<!-- ENDIF --></a></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<form method="post" action="{ACTION}" name="post" id="myform">
+	<div class="contentHeader">
+		<h1 class="contentTitle"><!-- IF NAME != "" -->{NAME}<!-- ELSE -->{L_sg_add_signature}<!-- ENDIF --></h1>
+	</div>
+	<div class="clear"></div>
+	
+	<fieldset class="settings mediumsettings">
+		<legend>{L_core_sett_fs_globalsettings}</legend>
+		<dl>
+			<dt><label>{L_name}</label></dt>
+			<dd><input type="text" name="name" size="40" value="{NAME}"/></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_background}</label></dt>
+			<dd>{BACKGROUND_DD}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_font}</label></dt>
+			<dd>{FONT_DD}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_font_color}</label></dt>
+			<dd>{FONT_COLOR}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_font_border_color}</label></dt>
+			<dd>{FONT_BORDER_COLOR}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_font_border_size}</label></dt>
+			<dd>{FONT_BORDER_SIZE}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_picture_preset}</label></dt>
+			<dd>{PICTURE_PRESET_DD}</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_sg_live_preview}</label></dt>
+			<dd><div id="live_preview"></div></dd>
+		</dl>
+		
+		
+		<dl>
+			<dt><label>{L_sg_values}</label></dt>
+			<dd>
+				<table width="100%" border="0" cellspacing="1" cellpadding="2" id="gr_form_table" class="colorswitch">
+					<thead>
+					<tr class="not-sortable">
+						<th width="10px"></th>
+						<th width="10px"></th>
+						<th width="10px"></th>
+						<th>{L_sg_position}</th>
+						<th>{L_sg_preset}</th>
+						<th>{L_sg_show_label}</th>
+					</tr>
+					</thead>
+					<tbody>
+					
+					<!-- BEGIN field_row -->
+					<tr>
+						<td><span class="ui-icon ui-icon-arrowthick-2-n-s" title="{L_dragndrop}"></span></td>
+						<td width="10px"><i class="fa fa-trash-o fa-lg hand" title="{L_sg_delete_field}"  onclick="delete_row(this);"></i></td>
+						<td width="10px">#{field_row.KEY}</td>	
+						<td>{field_row.POS_DD}</td>
+						<td>{field_row.PRESET_DD}</td>
+						<td><input type="checkbox" name="label[{field_row.KEY}]" value="1" id="showlabel" onchange="handle_label();" {field_row.LABEL}/><input type="hidden" name="order[]" value="{field_row.KEY}" id="showlabel" onchange="handle_label();" /></td>
+					</tr>
+					<!-- END field_row -->
+					
+					</tbody>
+				</table>
+				<button type="button" onclick="add_row();"><i class="fa fa-plus"></i>{L_sg_add_field}</button>
+			</dd>
+		</dl>
+		
+	</fieldset>
+		
+	<div class="contentFooter">
+		<button type="submit" name="save"><i class="fa fa-check"></i>{L_save}</button>
+		<button type="button" name="display" onclick="window.location='signatures.php{SID}'"><i class="fa fa-chevron-left"></i>{L_back}</button>
+	</div>
+{CSRF_TOKEN}
+</form>
+
+<table style="display:none;">
+	<tr id="reference_row">
+		<td><span class="ui-icon ui-icon-arrowthick-2-n-s" title="{L_dragndrop}"></span></td>
+		<td width="10px"><i class="fa fa-trash-o fa-lg hand" title="{L_sg_delete_field}"  onclick="delete_row(this);"></i></td>
+		<td width="10px">#KEY</td>	
+		<td>{POS_DD}</td>
+		<td>{PRESET_DD}</td>
+		<td><input type="checkbox" name="label[KEY]" value="1" id="showlabel" onchange="handle_label();" /><input type="hidden" name="order[]" value="KEY" id="showlabel" onchange="handle_label();" /></td>
+	</tr>
+</table>

@@ -1,0 +1,62 @@
+<!-- IF not S_UPLOAD -->
+
+<div class="breadcrumb-container">
+	<ul class="breamcrumb">
+		<li><a href="{EQDKP_CONTROLLER_PATH}{SID}" title="{L_home}"><i class="fa fa-home"></i></a></li>
+		<li><a href="{EQDKP_ROOT_PATH}admin/{SID}">{L_menu_admin_panel}</a>
+		<li class="current"><a>{L_siggenerator}: {L_sg_manage_backgrounds}</a></li>
+	</ul>
+	<div class="clear"></div>
+</div>
+
+<div class="infobox infobox-large infobox-blue clearfix">
+	<i class="fa fa-info-circle fa-4x pull-left"></i> {L_sg_background_help}
+</div>
+
+<form method="post" action="{ACTION}" name="post">
+	<div class="contentHeader">
+		<h1 class="contentTitle">{L_sg_manage_backgrounds}</h1>
+	</div>
+	<div class="tableHeader floatRight">
+		<button class="mainoption" type="button" name="addadj" onclick="addbg()"><i class="fa fa-plus"></i>{L_sg_add_background}</button>
+	</div>
+	<div class="clear"></div>
+	<table width="100%" border="0" cellspacing="1" cellpadding="2" class="colorswitch" id="article_categories-table">
+		<tr>
+			<th></th>
+			<th>{L_name}</th>
+			<th>{L_sg_folder}</th>
+		</tr>
+		<!-- BEGIN bg_row -->
+		<tr>
+			<td><!-- IF bg_row.S_DATA_DIR --><input type="checkbox" value="{bg_row.FONTNAME}" name="selected_ids[]" /><!-- ENDIF --></td>
+			<td>{bg_row.FONTNAME}</td>
+			<td>{bg_row.FOLDER}</td>
+		</tr>
+		<!-- END bg_row -->
+	</table>
+
+	<div class="contentFooter">
+		<button class="mainoption" type="submit" name="del"><i class="fa fa-trash"></i>{L_delete_selected}</button>
+	</div>
+{CSRF_TOKEN}	
+</form>
+
+<!-- ELSE -->
+
+<form action="" method="post" enctype='multipart/form-data'>
+	<fieldset class="settings mediumsettings">
+			<!-- BEGIN fields -->
+			<dl>
+				<dt><label>{fields.NAME}</label><br /><span>{fields.HELP}</span></dt>
+				<dd>{fields.FIELD}{fields.TEXT}</dd>
+			</dl>
+			<!-- END fields -->
+	</fieldset>
+	
+	<center>
+		<button type="submit" name="upload" value="1"><i class="fa fa-check"></i>{L_save}</button>
+	</center>
+	{CSRF_TOKEN}
+</form>
+<!-- ENDIF -->
