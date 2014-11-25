@@ -30,7 +30,7 @@ class Signatures extends page_generic {
 		if (!$this->pm->check('siggenerator', PLUGIN_INSTALLED))
 			message_die($this->user->lang('mc_plugin_not_installed'));
 		
-		$this->user->check_auth('a_mediacenter_manage');
+		$this->user->check_auth('a_siggenerator_manage');
 		
 		$handler = array(
 			'save' 				=> array('process' => 'save', 'csrf' => true),
@@ -139,9 +139,9 @@ class Signatures extends page_generic {
 	public function edit(){
 		$intSignatureID = $this->in->get('sig', 0);
 		
+		register('game');
 		$potential_presets = $this->pdh->get_preset_list('%member_id%', array('%member_id%', '%with_twink%', '%dkp_id%'), array());
 		$potential_keys = array_keys($potential_presets);
-		
 		$dkp_list = $this->pdh->get('multidkp', 'id_list');
 		
 		$pps = array('-' => '');
