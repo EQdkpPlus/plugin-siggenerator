@@ -49,11 +49,13 @@
 			$intImageMargin = 10;
 			
 			//Charicon
+			register('game');
 			$arrPresets = $this->pdh->get_preset($arrSignatureData['picture_preset']);
 			$subArray = array('%member_id%' => $intCharID);
 
 			$strCharicon = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 			$strCharicon = str_replace($this->server_path, $this->root_path, $strCharicon);
+
 			if (strlen($strCharicon)){
 			
 				$strChariconExtension = strtolower(pathinfo($strCharicon, PATHINFO_EXTENSION));
@@ -107,7 +109,12 @@
 					} else {
 						$arrPresets = $this->pdh->get_preset($myPreset);
 						$subArray = array('%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
-						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if ($arrPresets[0] == 'member' && $arrPresets[1] == 'profile_field'){
+							$arrPresets[2][] = true;
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						} else {
+							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 					
@@ -138,7 +145,12 @@
 					} else {
 						$arrPresets = $this->pdh->get_preset($myPreset);
 						$subArray = array('%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
-						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if ($arrPresets[0] == 'member' && $arrPresets[1] == 'profile_field'){
+							$arrPresets[2][] = true;
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						} else {
+							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 				
@@ -173,7 +185,14 @@
 					} else {
 						$arrPresets = $this->pdh->get_preset($myPreset);
 						$subArray = array('%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
-						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						
+						if ($arrPresets[0] == 'member' && $arrPresets[1] == 'profile_field'){
+							$arrPresets[2][] = true;
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						} else {
+							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
+						
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 	
@@ -207,7 +226,12 @@
 					} else {
 						$arrPresets = $this->pdh->get_preset($myPreset);
 						$subArray = array('%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
-						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if ($arrPresets[0] == 'member' && $arrPresets[1] == 'profile_field'){
+							$arrPresets[2][] = true;
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						} else {
+							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 					
