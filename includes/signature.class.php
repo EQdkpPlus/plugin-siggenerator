@@ -113,8 +113,9 @@
 							$arrPresets[2][] = true;
 							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						} else {
-							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						}
+						$value = trim(strip_tags($value));
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 					
@@ -149,8 +150,9 @@
 							$arrPresets[2][] = true;
 							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						} else {
-							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						}
+						$value = trim(strip_tags($value));
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 				
@@ -190,9 +192,9 @@
 							$arrPresets[2][] = true;
 							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						} else {
-							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						}
-						
+						$value = trim(strip_tags($value));		
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 	
@@ -230,8 +232,9 @@
 							$arrPresets[2][] = true;
 							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						} else {
-							$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
 						}
+						$value = trim(strip_tags($value));
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray));
 					}
 					
