@@ -79,7 +79,7 @@ if ( !class_exists( "pdh_w_siggenerator" ) ) {
 					'date'				=> $this->time->time,
 			);
 				
-			$objQuery = $this->db->prepare("UPDATE __siggenerator_signatures :p")->set($arrQuery)->execute($intSigID);
+			$objQuery = $this->db->prepare("UPDATE __siggenerator_signatures :p WHERE id=?")->set($arrQuery)->execute($intSigID);
 				
 			if ($objQuery){					
 				$this->pdh->enqueue_hook('siggenerator_signatures_update');
