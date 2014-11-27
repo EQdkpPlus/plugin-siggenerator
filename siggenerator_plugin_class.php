@@ -133,14 +133,16 @@ class siggenerator extends plugin_generic
    */
   private function gen_main_menu()
   {
-  
-  	$main_menu = array(
-  			2 => array (
-  					'link'  => $this->routing->build('Signatures', false, false, true, true),
-  					'text'  => $this->user->lang('sg_signatur_link'),
-  					'check' => 'u_siggenerator_view',
-  			),
-  	);
+  	if ($this->user->is_signedin()){
+  	
+	  	$main_menu = array(
+	  			1 => array (
+	  					'link'  => $this->routing->build('Signatures', false, false, true, true),
+	  					'text'  => $this->user->lang('sg_signatur_link'),
+	  					'check' => 'u_siggenerator_view',
+	  			),
+	  	);
+  	} else return array();
   
   	return $main_menu;
   }
