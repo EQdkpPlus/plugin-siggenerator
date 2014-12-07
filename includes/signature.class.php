@@ -254,8 +254,8 @@
 			$dimensions = imagettfbbox(7, 0, $font, $strURL);
 			$textWidth = abs($dimensions[4] - $dimensions[0]);
 			$x = imagesx($img) - $textWidth;
-			imagettftext ( $img , 7 , 0, $x-$marginRechtsLinks, 100-$intMargin , $fontColorRes , $font ,$strURL);
-			
+			$y = imagesy($img);
+			imagettftext ( $img , 7 , 0, $x-$marginRechtsLinks, $y-$intMargin , $fontColorRes , $font ,$strURL);
 			
 			
 			//Save that thing

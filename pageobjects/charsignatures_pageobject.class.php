@@ -67,7 +67,7 @@ class charsignatures_pageobject extends pageobject {
 	$intCacheHours = 4;
 	$cache_time_browser = $intCacheHours * 60 * 60;
 	
-	$blnRenew = true;
+	$blnRenew = false;
 	$strSignatureImage = md5($intCharacterID.'_'.$intSigID.'_'.$this->user->data['user_lang']).'.jpg';
 	$strSignaturFolder = $this->pfh->FolderPath('sigs', 'signatures');
 	if (is_file($strSignaturFolder.$strSignatureImage)){
@@ -78,13 +78,14 @@ class charsignatures_pageobject extends pageobject {
 			$blnRenew = true;
 		}
 		
-		header("cache-control: max-age=".$cache_time_browser);
-		header("Content-disposition: inline; filename=signature.jpg");
-		header("content-type: image/jpg");
-			
-		echo file_get_contents($strSignaturFolder.$strSignatureImage);
-		exit();
-		
+		if(!$blnRenew){
+			header("cache-control: max-age=".$cache_time_browser);
+			header("Content-disposition: inline; filename=signature.jpg");
+			header("content-type: image/jpg");
+				
+			echo file_get_contents($strSignaturFolder.$strSignatureImage);
+			exit();
+		}
 	};
 	
 	include_once $this->root_path.'plugins/siggenerator/includes/signature.class.php';
