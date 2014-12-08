@@ -70,13 +70,26 @@
 						$charicon = imagecreatefrompng($strCharicon);
 						break;
 				}
-	
 				
-				$intImageSize = 48;
-				imagefilledrectangle($img, $marginRechtsLinks, $intMargin, $intImageSize+$marginRechtsLinks+1, $intImageSize+$intMargin+1, $fontColorRes);
-				imagecopyresampled($img, $charicon, $marginRechtsLinks+1, $intMargin+1,0,0,$intImageSize,$intImageSize,ImageSX($charicon), ImageSY($charicon));
+				// Set a maximum height and width
+				$charicon_width = 48;
+				$charicon_height = 48;
 				
+				// Get new dimensions
+				list($width_orig, $height_orig) = getimagesize($strCharicon);
+				$ratio_orig = $width_orig/$height_orig;
+				
+				if ($charicon_width/$charicon_height > $ratio_orig) {
+					$charicon_width = $charicon_height*$ratio_orig;
+				} else {
+					$charicon_height = $charicon_width/$ratio_orig;
+				}
+				
+				// Resample
 				$intImageMargin = 70;
+				
+				imagefilledrectangle($img, $marginRechtsLinks, $intMargin, $charicon_width+$marginRechtsLinks+1, $charicon_height+$intMargin+1, $fontColorRes);
+				imagecopyresampled($img, $charicon, $marginRechtsLinks+1, $intMargin+1, 0, 0, $charicon_width, $charicon_height, $width_orig, $height_orig);
 			}
 			//Load Font
 			$font = $this->root_path.$arrSignatureData['font'];

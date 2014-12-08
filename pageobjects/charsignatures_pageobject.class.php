@@ -86,24 +86,28 @@ class charsignatures_pageobject extends pageobject {
 			echo file_get_contents($strSignaturFolder.$strSignatureImage);
 			exit();
 		}
-	};
-	
+	} else {
+		$blnRenew = true;	
+	}
+
 	include_once $this->root_path.'plugins/siggenerator/includes/signature.class.php';
 	$this->signature = register('signature');
-	
+
 	if ($blnRenew){
 		//Create Signature
 		$arrSigData = $this->pdh->get('siggenerator', 'data', array($intSigID));
+
 		if (!$arrSigData){
 			$this->signature->errorimage("#404 - Signature not Found");
 		}
-				
+					
 		$arrSigData['title'] = $arrSigData['objects']['title'];
 		$arrSigData['subtitle'] = $arrSigData['objects']['subtitle'];
 		$arrSigData['right'] = $arrSigData['objects']['right'];
 		$arrSigData['left'] = $arrSigData['objects']['left'];
 		
 		$blnResult = $this->signature->createSignature($intCharacterID, $arrSigData, $strSignatureImage);
+
 		if (is_file($strSignaturFolder.$strSignatureImage)){
 			//Output File
 			header("Content-disposition: inline; filename=signature.jpg");
