@@ -56,7 +56,10 @@
 			$subArray = array('%member_id%' => $intCharID);
 
 			$strCharicon = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
-			$strCharicon = str_replace($this->server_path, $this->root_path, $strCharicon);
+			
+			if(substr($strCharicon, 0, strlen($this->server_path)) === $this->server_path){
+				$strCharicon = $this->root_path.substr($strCharicon, strlen($this->server_path));
+			}
 
 			if (strlen($strCharicon)){
 			
