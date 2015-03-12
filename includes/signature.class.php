@@ -121,6 +121,9 @@
 						$arrPresets = $this->pdh->get_preset($realPreset);
 						$subArray = array('%dkp_id%' => $dkp_id, '%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
 						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if(in_array($realPreset, array('first_item', 'last_item', 'first_raid', 'last_raid'))){
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strDKPName = $this->pdh->get('multidkp', 'name', array($dkp_id));	
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray)).' ['.$strDKPName.']';
 						if (is_float($value)) $value = runden($value);
@@ -158,6 +161,9 @@
 						$arrPresets = $this->pdh->get_preset($realPreset);
 						$subArray = array('%dkp_id%' => $dkp_id, '%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
 						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if(in_array($realPreset, array('first_item', 'last_item', 'first_raid', 'last_raid'))){
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strDKPName = $this->pdh->get('multidkp', 'name', array($dkp_id));	
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray)).' ['.$strDKPName.']';
 						if (is_float($value)) $value = runden($value);
@@ -191,6 +197,7 @@
 					if ($myPreset == '-') continue;
 					
 					$myStrPos = strpos($myPreset, '_mdkp');
+
 					if ($myStrPos !== false){
 						$realPreset = substr($myPreset, 0, $myStrPos);
 						$dkp_id = substr($myPreset, $myStrPos+5);
@@ -198,9 +205,12 @@
 						$arrPresets = $this->pdh->get_preset($realPreset);
 						$subArray = array('%dkp_id%' => $dkp_id, '%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
 						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if(in_array($realPreset, array('first_item', 'last_item', 'first_raid', 'last_raid'))){
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strDKPName = $this->pdh->get('multidkp', 'name', array($dkp_id));	
 						$strPresetname = $this->pdh->get_caption($arrPresets[0], $arrPresets[1], $this->pdh->post_process_preset($arrPresets[3], $subArray)).' ['.$strDKPName.']';
-						
+
 						if (is_float($value)) $value = runden($value);
 					} else {
 						$arrPresets = $this->pdh->get_preset($myPreset);
@@ -237,6 +247,9 @@
 						$arrPresets = $this->pdh->get_preset($realPreset);
 						$subArray = array('%dkp_id%' => $dkp_id, '%member_id%' => $intCharID, '%with_twink%' =>!intval($this->config->get('show_twinks')));
 						$value = $this->pdh->get($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						if(in_array($realPreset, array('first_item', 'last_item', 'first_raid', 'last_raid'))){
+							$value = $this->pdh->geth($arrPresets[0], $arrPresets[1], $arrPresets[2], $subArray);
+						}
 						$strDKPName = $this->pdh->get('multidkp', 'name', array($dkp_id));	
 						
 						if (is_float($value)) $value = runden($value);
