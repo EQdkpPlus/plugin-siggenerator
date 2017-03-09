@@ -193,8 +193,8 @@ class Signatures extends page_generic {
 				foreach($arrSigData['objects']['title'] as $arrData){
 					$this->tpl->assign_block_vars('field_row', array(
 						'KEY' => $key,
-						'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'title')),
-						'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])),
+						'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'title')))->output(),
+						'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])))->output(),
 						'LABEL'				=> ($arrData[1]) ? " checked='checked'" : "",
 					));
 					$key++;
@@ -205,8 +205,8 @@ class Signatures extends page_generic {
 				foreach($arrSigData['objects']['subtitle'] as $arrData){
 					$this->tpl->assign_block_vars('field_row', array(
 							'KEY' => $key,
-							'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'subtitle')),
-							'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])),
+							'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'subtitle')))->output(),
+							'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])))->output(),
 							'LABEL'				=> ($arrData[1]) ? " checked='checked'" : "",
 					));
 					$key++;
@@ -217,8 +217,8 @@ class Signatures extends page_generic {
 				foreach($arrSigData['objects']['right'] as $arrData){
 					$this->tpl->assign_block_vars('field_row', array(
 							'KEY' => $key,
-							'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'right')),
-							'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])),
+							'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'right')))->output(),
+							'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])))->output(),
 							'LABEL'				=> ($arrData[1]) ? " checked='checked'" : "",
 					));
 					$key++;
@@ -229,8 +229,8 @@ class Signatures extends page_generic {
 				foreach($arrSigData['objects']['left'] as $arrData){
 					$this->tpl->assign_block_vars('field_row', array(
 							'KEY' => $key,
-							'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'left')),
-							'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])),
+							'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"', 'value' => 'left')))->output(),
+							'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"', 'value' => $arrData[0])))->output(),
 							'LABEL'				=> ($arrData[1]) ? " checked='checked'" : "",
 					));
 					$key++;
@@ -240,33 +240,33 @@ class Signatures extends page_generic {
 			
 			
 			$this->tpl->assign_vars(array(
-					'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"')),
-					'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"')),
+					'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"')))->output(),
+					'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"')))->output(),
 					
 					'NAME'				=> $arrSigData['name'],
 					'SIG'				=> $this->url_id,
-					'FONT_COLOR'		=> new hcolorpicker('font_color', array('value' => $arrSigData['font_color'])),
-					'FONT_BORDER_COLOR' => new hcolorpicker('font_border_color', array('value' => $arrSigData['font_border_color'])),
-					'FONT_BORDER_SIZE'	=> new hspinner('font_border_size', array('value' => $arrSigData['font_border_size'], 'min' => 0, 'max' => 10)),
+					'FONT_COLOR'		=> (new hcolorpicker('font_color', array('value' => $arrSigData['font_color'])))->output(),
+					'FONT_BORDER_COLOR' => (new hcolorpicker('font_border_color', array('value' => $arrSigData['font_border_color'])))->output(),
+					'FONT_BORDER_SIZE'	=> (new hspinner('font_border_size', array('value' => $arrSigData['font_border_size'], 'min' => 0, 'max' => 10)))->output(),
 					'KEY'				=> $key,
-					'BACKGROUND_DD'		=> new hdropdown('background', array('options' => $arrBackgrounds, 'value' => $arrSigData['background'])),
-					'FONT_DD'			=> new hdropdown('font', array('options' => $arrFonts, 'value' => $arrSigData['font'])),
-					'PICTURE_PRESET_DD' => new hdropdown('picture_preset', array('options' => $arrPicturePresets, 'value' => $arrSigData['picture_preset'])),
+					'BACKGROUND_DD'		=> (new hdropdown('background', array('options' => $arrBackgrounds, 'value' => $arrSigData['background'])))->output(),
+					'FONT_DD'			=> (new hdropdown('font', array('options' => $arrFonts, 'value' => $arrSigData['font'])))->output(),
+					'PICTURE_PRESET_DD' => (new hdropdown('picture_preset', array('options' => $arrPicturePresets, 'value' => $arrSigData['picture_preset'])))->output(),
 			));
 			
 			
 		} else {
 		
 			$this->tpl->assign_vars(array(
-				'POS_DD'			=> new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"')),
-				'PRESET_DD'			=> new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"')),
-				'FONT_COLOR'		=> new hcolorpicker('font_color', array('value' => 'fff')),
-				'FONT_BORDER_COLOR' => new hcolorpicker('font_border_color', array('value' => '000')),
-				'FONT_BORDER_SIZE'	=> new hspinner('font_border_size', array('value' => 1, 'min' => 0, 'max' => 10)),
+				'POS_DD'			=> (new hdropdown('pos[]', array('options' => $arrPosOptions, 'js' => 'onchange="handle_pos(this)"')))->output(),
+				'PRESET_DD'			=> (new hdropdown('preset[]', array('options' => $pps, 'js' => 'onchange="handle_preset(this)"')))->output(),
+				'FONT_COLOR'		=> (new hcolorpicker('font_color', array('value' => 'fff')))->output(),
+				'FONT_BORDER_COLOR' => (new hcolorpicker('font_border_color', array('value' => '000')))->output(),
+				'FONT_BORDER_SIZE'	=> (new hspinner('font_border_size', array('value' => 1, 'min' => 0, 'max' => 10)))->output(),
 				'KEY'				=> 1,
-				'BACKGROUND_DD'		=> new hdropdown('background', array('options' => $arrBackgrounds)),
-				'FONT_DD'			=> new hdropdown('font', array('options' => $arrFonts, 'value' => 'plugins/siggenerator/includes/fonts/OpenSans-Regular.ttf')),
-				'PICTURE_PRESET_DD' => new hdropdown('picture_preset', array('options' => $arrPicturePresets)),
+				'BACKGROUND_DD'		=> (new hdropdown('background', array('options' => $arrBackgrounds)))->output(),
+				'FONT_DD'			=> (new hdropdown('font', array('options' => $arrFonts, 'value' => 'plugins/siggenerator/includes/fonts/OpenSans-Regular.ttf')))->output(),
+				'PICTURE_PRESET_DD' => (new hdropdown('picture_preset', array('options' => $arrPicturePresets)))->output(),
 			));
 		}
 		

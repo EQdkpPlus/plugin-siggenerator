@@ -61,7 +61,7 @@ class signatures_pageobject extends pageobject {
 		$strMembername =  $this->pdh->get('member', 'name', array($myFirstChar));
 
 		$this->tpl->assign_vars(array(
-			'CHAR_DD'	=> new hdropdown('chars', array('options' => $arrDD, 'js' => 'onchange="change_char(this.value)"')),
+			'CHAR_DD'	=> (new hdropdown('chars', array('options' => $arrDD, 'js' => 'onchange="change_char(this.value)"')))->output(),
 			'BBCODE'	=> '[img]'.$this->env->buildlink().$this->controller_path_plain.'CharSignature/ID/?sig=SIG&key=KEY[/img]',
 			'HTML'		=> '<img src="'.$this->env->buildlink().$this->controller_path_plain.'CharSignature/ID/?sig=SIG&key=KEY" />',
 			'DIRECT'	=> $this->env->buildlink().$this->controller_path_plain.'CharSignature/ID/?sig=SIG&key=KEY',
