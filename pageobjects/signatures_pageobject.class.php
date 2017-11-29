@@ -85,6 +85,9 @@ class signatures_pageobject extends pageobject {
 			'page_title'	=> $this->user->lang('sg_signatur_link'),
 			'template_path'	=> $this->pm->get_data('siggenerator', 'template_path'),
 			'template_file'	=> 'signatures.html',
+				'page_path'			=> [
+					['title'=>$this->user->lang('sg_signatur_link'), 'url'=>' '],
+				],
 			'display'		=> true
 		));	
 	}

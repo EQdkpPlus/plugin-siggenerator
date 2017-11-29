@@ -276,12 +276,18 @@ class Signatures extends page_generic {
 				cursor: 'pointer',
 			});
 		", "docready");
-		
+
+		$strName = ($this->url_id) ? $arrSigData['name'] : $this->user->lang('sg_add_signature');
 		
 		$this->core->set_vars(array(
 				'page_title'		=> $this->user->lang('sg_manage_signatures').': '.$this->pdh->get('siggenerator', 'name', array($intSignatureID)),
 				'template_path'		=> $this->pm->get_data('siggenerator', 'template_path'),
 				'template_file'		=> 'admin/signatures_edit.html',
+				'page_path'			=> [
+						['title'=>$this->user->lang('menu_admin_panel'), 'url'=>$this->root_path.'admin/'.$this->SID],
+						['title'=>$this->user->lang('siggenerator').': '.$this->user->lang('sg_manage_signatures'), 'url'=> $this->root_path.'plugins/siggenerator/admin/signatures.php'.$this->SID],
+						['title'=>$strName, 'url'=>' '],
+				],
 				'display'			=> true)
 		);
 	}
@@ -326,6 +332,10 @@ class Signatures extends page_generic {
 				'page_title'		=> $this->user->lang('sg_manage_signatures'),
 				'template_path'		=> $this->pm->get_data('siggenerator', 'template_path'),
 				'template_file'		=> 'admin/signatures.html',
+				'page_path'			=> [
+						['title'=>$this->user->lang('menu_admin_panel'), 'url'=>$this->root_path.'admin/'.$this->SID],
+						['title'=>$this->user->lang('siggenerator').': '.$this->user->lang('sg_manage_signatures'), 'url'=>' '],
+				],
 				'display'			=> true)
 		);
 	}

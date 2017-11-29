@@ -113,6 +113,10 @@ class Fonts extends page_generic {
 				'page_title'		=> $this->user->lang('sg_manage_backgrounds'),
 				'template_path'		=> $this->pm->get_data('siggenerator', 'template_path'),
 				'template_file'		=> 'admin/backgrounds.html',
+				'page_path'			=> [
+						['title'=>$this->user->lang('menu_admin_panel'), 'url'=>$this->root_path.'admin/'.$this->SID],
+						['title'=>$this->user->lang('siggenerator').': '.$this->user->lang('sg_manage_backgrounds'), 'url'=>' '],
+				],
 				'display'			=> true)
 		);
 	}
@@ -134,6 +138,10 @@ class Fonts extends page_generic {
 				'page_title'		=> $this->user->lang('sg_manage_backgrounds'),
 				'template_path'		=> $this->pm->get_data('siggenerator', 'template_path'),
 				'template_file'		=> 'admin/backgrounds.html',
+				'page_path'			=> [
+						['title'=>$this->user->lang('menu_admin_panel'), 'url'=>$this->root_path.'admin/'.$this->SID],
+						['title'=>$this->user->lang('siggenerator').': '.$this->user->lang('sg_manage_backgrounds'), 'url'=>' '],
+				],
 				'display'			=> true)
 		);
 	}
