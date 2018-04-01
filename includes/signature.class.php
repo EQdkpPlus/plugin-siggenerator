@@ -97,9 +97,8 @@
 				imagecopyresampled($img, $charicon, $marginRechtsLinks+1, $intMargin+1, 0, 0, $charicon_width, $charicon_height, $width_orig, $height_orig);
 			}
 			//Load Font
-			$font = $this->root_path.$arrSignatureData['font'];
-			
-			
+			$font = realpath(__DIR__.'../../../../'.$arrSignatureData['font']);
+
 			$strokeColor = $this->hex2rgb($arrSignatureData['font_border_color']);
 			$strokeColorRes = imagecolorallocate($img,  $strokeColor[0], $strokeColor[1], $strokeColor[2]);
 			
@@ -310,7 +309,7 @@
 			$strokeColor = $this->hex2rgb('000');
 			$strokeColorRes = ImageColorAllocate($image, $strokeColor[0], $strokeColor[1], $strokeColor[2]);
 			
-			$font = $this->root_path.'plugins/siggenerator/includes/fonts/OpenSans-Regular.ttf';
+			$font = __DIR__.'/fonts/OpenSans-Regular.ttf';
 			
 			$this->imagettfstroketext ( $image , 16 , 0, 10, 60 , $fontColorRes , $strokeColorRes, $font , $strText, 1);
 			

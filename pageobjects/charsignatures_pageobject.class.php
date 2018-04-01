@@ -73,8 +73,9 @@ class charsignatures_pageobject extends pageobject {
 		$strSignaturFolder = $this->pfh->FolderPath('sigs', 'signatures');
 		if (is_file($strSignaturFolder.$strSignatureImage)){
 			//Check Filedate
-			$mytime = date();
+			$mytime = time();
 			$filetime = filemtime($strSignaturFolder.$strSignatureImage);
+
 			if ($filetime+($intCacheHours* 60 * 60) < $mytime){
 				$blnRenew = true;
 			}
