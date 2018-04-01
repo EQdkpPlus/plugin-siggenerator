@@ -29,7 +29,7 @@ if (!defined('EQDKP_INC')){
   +--------------------------------------------------------------------------*/
 class siggenerator extends plugin_generic{
 
-	public $version		= '0.1.4';
+	public $version		= '0.1.5';
 	public $build		= '1';
 	public $copyright	= 'GodMod';
 	public $vstatus		= 'Beta';
