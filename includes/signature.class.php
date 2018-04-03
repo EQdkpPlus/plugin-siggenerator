@@ -97,7 +97,7 @@
 				imagecopyresampled($img, $charicon, $marginRechtsLinks+1, $intMargin+1, 0, 0, $charicon_width, $charicon_height, $width_orig, $height_orig);
 			}
 			//Load Font
-			$font = realpath(__DIR__.'../../../../'.$arrSignatureData['font']);
+			$font = realpath($arrSignatureData['font']);
 
 			$strokeColor = $this->hex2rgb($arrSignatureData['font_border_color']);
 			$strokeColorRes = imagecolorallocate($img,  $strokeColor[0], $strokeColor[1], $strokeColor[2]);
